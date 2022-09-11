@@ -1,3 +1,4 @@
+import { User } from './../auth/entities/auth.entity';
 import { TaskStatus } from './task-status.enum';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -13,17 +14,17 @@ export class TaskService {
     private taskRepository: TaskRepository,
   ) {}
 
-  async getTasks(filterDto: GetTaskFilterDto): Promise<Task[]> {
-    return await this.taskRepository.getTasks(filterDto);
+  async getTasks(filterDto: GetTaskFilterDto, user: User): Promise<Task[]> {
+    return await this.taskRepository.getTasks(filterDto, user);
   }
 
-  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-    return this.taskRepository.createTask(createTaskDto);
+  async createTask(createTaskDto: CreateTaskDto, user: User): Promise<Task> {
+    return this.taskRepository.createTask(createTaskDto, user);
   }
 
-  async getTaskById(id: string): Promise<Task> {
+  async getTaskById(id: string, user: User): Promise<Task> {
     const found = await this.taskRepository.findOne({
-      where: { id: id },
+      where: { id: id, user },
     });
 
     if (!found) {
@@ -32,15 +33,19 @@ export class TaskService {
     return found;
   }
 
-  async updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
-    const task = await this.getTaskById(id);
+  async updateTaskStatus(
+    id: string,
+    status: TaskStatus,
+    user: User,
+  ): Promise<Task> {
+    const task = await this.getTaskById(id, user);
     task.status = status;
     await this.taskRepository.save(task);
     return task;
   }
 
-  async deleteTaskById(id: string): Promise<void> {
-    const result = await this.taskRepository.delete({ id: id });
+  async deleteTaskById(id: string, user: User): Promise<void> {
+    const result = await this.taskRepository.delete({ id: id, user });
     if (result.affected === 0) {
       throw new NotFoundException(`Task With ID "${id}" Not Found`);
     }
