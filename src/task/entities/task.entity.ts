@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Exclude } from 'class-transformer';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from './../auth/entities/auth.entity';
-import { TaskStatus } from './task-status.enum';
+import { User } from '../../auth/entities/auth.entity';
+import { TaskStatus } from '../task-status.enum';
 
 @Entity()
 export class Task {

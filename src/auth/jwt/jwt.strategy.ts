@@ -1,5 +1,5 @@
-import { User } from './entities/auth.entity';
-import { UserRepository } from './repository/auth.repository';
+import { User } from '../entities/auth.entity';
+import { UserRepository } from '../repository/auth.repository';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';

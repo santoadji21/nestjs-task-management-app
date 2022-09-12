@@ -1,8 +1,8 @@
 import { TaskService } from './task.service';
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { TaskStatus } from './task-status.enum';
-import { TaskRepository } from './task.repository';
+import { TaskStatus } from '../task-status.enum';
+import { TaskRepository } from '../repository/task.repository';
 
 const mockTasksRepository = () => ({
   getTasks: jest.fn(),

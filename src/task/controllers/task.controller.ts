@@ -1,4 +1,4 @@
-import { User } from './../auth/entities/auth.entity';
+import { User } from '../../auth/entities/auth.entity';
 import { AuthGuard } from '@nestjs/passport';
 import {
   Body,
@@ -12,12 +12,12 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTaskFilterDto } from './dto/get-task-filter.dto';
-import { TaskStatus } from './task-status.enum';
-import { Task } from './task.entity';
+import { CreateTaskDto } from '../dto/create-task.dto';
+import { GetTaskFilterDto } from '../dto/get-task-filter.dto';
+import { TaskStatus } from '../task-status.enum';
+import { Task } from '../entities/task.entity';
 
-import { TaskService } from './task.service';
+import { TaskService } from '../services/task.service';
 import { GetUser } from 'src/auth/get-user-decorator';
 
 @Controller('task')
